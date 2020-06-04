@@ -1,4 +1,5 @@
 import React from "react";
+import { TextField } from "@material-ui/core";
 
 const ResultContainer = props => {
   return (
@@ -12,7 +13,7 @@ const ResultContainer = props => {
         margin: "5px"
       }}
     >
-      ResultContainer
+      <TextField label="Type a city name..." />
     </div>
   );
 };
