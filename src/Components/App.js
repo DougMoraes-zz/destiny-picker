@@ -1,5 +1,6 @@
 import React from "react";
 import ResultContainer from "./ResultContainer/ResultContainer";
+import { TextField } from "@material-ui/core";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         alignItems: "center"
       }}
     >
+      <TextField label="Type your current city name..." />
       <ResultContainer />
       <ResultContainer />
       <ResultContainer />
