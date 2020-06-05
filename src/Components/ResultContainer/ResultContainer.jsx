@@ -8,12 +8,14 @@ const ResultContainer = props => {
         display: "flex",
         alignItems: "center",
         border: "1px solid lightgray",
-        borderRadius: "10%",
+        borderRadius: "1%",
         minHeight: "10em",
-        margin: "5px"
+        minWidth: "80%",
+        margin: "5px",
+        padding: "15px"
       }}
     >
-      <TextField label="Type a city name..." />
+      <TextField label="Type your future city name..." size={"small"} />
     </div>
   );
 };
