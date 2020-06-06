@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
+import WeatherInfo from "../WeatherInfo/WeatherInfo";
 
 const ResultContainer = props => {
   const [cityName, setCityName] = useState("");
@@ -19,8 +20,10 @@ const ResultContainer = props => {
     >
       <TextField
         label="Type your future city name..."
+        size={"small"}
         onChange={e => setCityName(e.currentTarget.value)}
       />
+      <WeatherInfo />
     </div>
   );
 };
