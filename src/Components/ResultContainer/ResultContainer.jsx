@@ -1,7 +1,11 @@
-import React from "react";
-import { TextField } from "@material-ui/core";
+import React, { useState } from "react";
+import { TextField, Button } from "@material-ui/core";
+import WeatherInfo from "../WeatherInfo/WeatherInfo";
 
 const ResultContainer = props => {
+  const [tempCityName, setTempCityName] = useState("");
+  const [cityName, setCityName] = useState("");
+
   return (
     <div
       style={{
@@ -15,7 +19,21 @@ const ResultContainer = props => {
         padding: "15px"
       }}
     >
-      <TextField label="Type your future city name..." size={"small"} />
+      <div>
+        <TextField
+          label="Type your future city name..."
+          size={"small"}
+          onChange={e => setTempCityName(e.currentTarget.value)}
+        />
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => setCityName(tempCityName)}
+        >
+          Get Info!
+        </Button>
+      </div>
+      <WeatherInfo cityName={cityName} />
     </div>
   );
 };
