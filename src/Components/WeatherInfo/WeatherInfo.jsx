@@ -3,7 +3,7 @@ import { Typography } from "@material-ui/core";
 import WeatherApi from "../../APIs/WeatherApi";
 
 const WeatherInfo = props => {
-  const [forecasts, setForecasts] = useState(data);
+  const [forecasts, setForecasts] = useState([]);
   const [avgTemperatures, setAvgTemperatures] = useState({
     minimumAvg: 0,
     maximumAvg: 0
@@ -46,8 +46,8 @@ const WeatherInfo = props => {
         .catch(err => console.log(err));
     };
 
-    getCityId(props.cityName);
-  }, []);
+    props.cityName !== "" && getCityId(props.cityName);
+  }, [props.cityName]);
 
   return (
     <div>
