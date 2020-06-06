@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 
 const ResultContainer = props => {
+  const [cityName, setCityName] = useState("");
+
   return (
     <div
       style={{
@@ -15,7 +17,10 @@ const ResultContainer = props => {
         padding: "15px"
       }}
     >
-      <TextField label="Type your future city name..." size={"small"} />
+      <TextField
+        label="Type your future city name..."
+        onChange={e => setCityName(e.currentTarget.value)}
+      />
     </div>
   );
 };
