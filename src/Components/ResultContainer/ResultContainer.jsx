@@ -28,8 +28,9 @@ const ResultContainer = props => {
           Get Info!
         </Button>
       </div>
-      <WeatherInfo cityName={futureCityName} />
+      <WeatherInfo className="result-item" cityName={futureCityName} />
       <FlightInfo
+        className="result-item"
         toCity={futureCityName}
         fromCity={props.currentCity}
         fromDate={props.flightDate}

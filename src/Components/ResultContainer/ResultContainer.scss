@@ -13,4 +13,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-grow: 2;
+  flex-shrink: 1;
+}
+
+.result-item {
+  display: flex;
+  flex-shrink: 2;
 }
