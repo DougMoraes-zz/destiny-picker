@@ -7,6 +7,7 @@ import {
 } from "@material-ui/pickers";
 import "date-fns";
 import ResultContainer from "./ResultContainer/ResultContainer";
+import "./App.scss";
 
 const App = props => {
   const [tempCityName, setTempCityName] = useState("");
@@ -22,36 +23,39 @@ const App = props => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center"
-      }}
-    >
-      <TextField
-        label="Type your current city name..."
-        onChange={e => setTempCityName(e.currentTarget.value)}
-      />
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="dd/MM/yyyy"
+    <div className="app">
+      <div className="search-form">
+        <TextField
+          label="Type your current city name..."
+          className="search-form-item"
           margin="normal"
-          label="Fly Date"
-          value={flightDate}
-          onChange={date => setFlightDate(date)}
+          variant="outlined"
+          multiline
+          onChange={e => setTempCityName(e.currentTarget.value)}
         />
-      </MuiPickersUtilsProvider>
-      <Button
-        variant="outlined"
-        color="primary"
-        onClick={() => setCurrentCityName(tempCityName)}
-      >
-        Let's start!
-      </Button>
+        <MuiPickersUtilsProvider
+          utils={DateFnsUtils}
+          className="search-form-item"
+        >
+          <KeyboardDatePicker
+            disableToolbar
+            inputVariant="outlined"
+            format="dd/MM/yyyy"
+            margin="normal"
+            label="Flight Date"
+            value={flightDate}
+            onChange={date => setFlightDate(date)}
+          />
+        </MuiPickersUtilsProvider>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => setCurrentCityName(tempCityName)}
+          className="search-form-item"
+        >
+          Let's start!
+        </Button>
+      </div>
       <ResultContainer
         currentCity={currentCityName}
         flightDate={translateDateToString(flightDate)}
