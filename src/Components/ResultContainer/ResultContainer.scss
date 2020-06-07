@@ -1,0 +1,23 @@
+.result-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 1%;
+  min-height: 10em;
+  min-width: 80%;
+  margin: 5px;
+  padding: 15px;
+}
+
+.future-city-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 2;
+  flex-shrink: 1;
+}
+
+.result-item {
+  display: flex;
+  flex-shrink: 2;
+}

@@ -51,7 +51,7 @@ const WeatherInfo = props => {
   }, [props.cityName]);
 
   return (
-    <div>
+    <div className={props.className}>
       <Typography>{` Maximum Average Temperature: ${avgTemperatures.maximumAvg} Minimum Average Temperature: ${avgTemperatures.minimumAvg}`}</Typography>
     </div>
   );
