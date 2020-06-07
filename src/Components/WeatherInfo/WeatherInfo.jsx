@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@material-ui/core";
 import WeatherApi from "../../APIs/WeatherApi";
+import "./WeatherInfo.scss";
 
 const WeatherInfo = props => {
   const [forecasts, setForecasts] = useState([]);
@@ -51,8 +52,13 @@ const WeatherInfo = props => {
   }, [props.cityName]);
 
   return (
-    <div className={props.className}>
-      <Typography>{` Maximum Average Temperature: ${avgTemperatures.maximumAvg} Minimum Average Temperature: ${avgTemperatures.minimumAvg}`}</Typography>
+    <div className={`weather-info-container ${props.className}`}>
+      <img src="https://developer.accuweather.com/sites/default/files/01-s.png"></img>
+      <Typography variant="subtitle2">
+        <p>
+          {`Maximum Average Temperature: ${avgTemperatures.maximumAvg} Minimum Average Temperature: ${avgTemperatures.minimumAvg}`}
+        </p>
+      </Typography>
     </div>
   );
 };
