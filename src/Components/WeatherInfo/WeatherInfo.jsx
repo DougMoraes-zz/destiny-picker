@@ -32,14 +32,23 @@ const WeatherInfo = props => {
 
   return (
     <div className={`weather-info-container ${props.className}`}>
-      <img src="https://developer.accuweather.com/sites/default/files/01-s.png"></img>
-      <Typography variant="subtitle2">
-        <p className={`temperature-description`}>
-          {forecasts.length > 0
-            ? `${forecasts[0].Temperature.Maximum.Value} C / ${forecasts[0].Temperature.Minimum.Value} C`
-            : ""}
-        </p>
-      </Typography>
+      {forecasts.length > 0 && (
+        <Typography variant="subtitle2">
+          <img
+            src={`https://developer.accuweather.com/sites/default/files/${
+              forecasts[0].Day.Icon < 10
+                ? "0" + forecasts[0].Day.Icon
+                : forecasts[0].Day.Icon
+            }-s.png`}
+          />
+          <p className={`temperature-description`}>
+            {`${forecasts[0].Day.IconPhrase}`}
+          </p>
+          <p className={`temperature-description`}>
+            {`${forecasts[0].Temperature.Maximum.Value} C / ${forecasts[0].Temperature.Minimum.Value} C`}
+          </p>
+        </Typography>
+      )}
     </div>
   );
 };
