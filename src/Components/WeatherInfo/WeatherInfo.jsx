@@ -6,36 +6,15 @@ import "./WeatherInfo.scss";
 
 const WeatherInfo = props => {
   const [forecasts, setForecasts] = useState([]);
-  const [avgTemperatures, setAvgTemperatures] = useState({
-    minimumAvg: 0,
-    maximumAvg: 0
-  });
 
   useEffect(() => {
-    const CalculateAverageTemperature = list => {
-      const temperatures = list.reduce(
-        (result, item) => {
-          result.minimumAvg += item.Temperature.Minimum.Value;
-          result.maximumAvg += item.Temperature.Maximum.Value;
-
-          return result;
-        },
-        { minimumAvg: 0, maximumAvg: 0 }
-      );
-
-      temperatures.minimumAvg = temperatures.minimumAvg / list.length;
-      temperatures.maximumAvg = temperatures.maximumAvg / list.length;
-
-      return temperatures;
-    };
-
     const getForecasts = cityKey => {
       WeatherApi.forecasts
         .get(`${cityKey}?apikey=G5jhNzZpn0iWknOJM3pZzf4mrGFdzDzI&metric=true`)
         .then(resp => resp.data.DailyForecasts)
         .then(forecasts => {
+          console.log(forecasts);
           setForecasts(forecasts);
-          setAvgTemperatures(CalculateAverageTemperature(forecasts));
         })
         .catch(err => console.log(err));
     };
@@ -56,7 +35,9 @@ const WeatherInfo = props => {
       <img src="https://developer.accuweather.com/sites/default/files/01-s.png"></img>
       <Typography variant="subtitle2">
         <p className={`temperature-description`}>
-          {`Maximum Average Temperature: ${avgTemperatures.maximumAvg} Minimum Average Temperature: ${avgTemperatures.minimumAvg}`}
+          {forecasts.length > 0
+            ? `${forecasts[0].Temperature.Maximum.Value} C / ${forecasts[0].Temperature.Minimum.Value} C`
+            : ""}
         </p>
       </Typography>
     </div>
