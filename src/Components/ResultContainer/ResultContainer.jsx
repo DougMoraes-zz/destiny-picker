@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
+import FlightInfo from "../FlightInfo/FlightInfo";
 
 const ResultContainer = props => {
   const [tempCityName, setTempCityName] = useState("");
-  const [cityName, setCityName] = useState("");
+  const [futureCityName, furuteCityName] = useState("");
 
   return (
     <div
@@ -28,12 +29,22 @@ const ResultContainer = props => {
         <Button
           variant="outlined"
           color="primary"
-          onClick={() => setCityName(tempCityName)}
+          onClick={() => furuteCityName(tempCityName)}
         >
           Get Info!
         </Button>
       </div>
-      <WeatherInfo cityName={cityName} />
+      <WeatherInfo cityName={futureCityName} />
+      <FlightInfo
+        toCity={
+          props.fromCity !== "" && futureCityName === "" && futureCityName
+        }
+        fromCity={
+          props.fromCity !== "" && futureCityName === "" && props.fromCity
+        }
+        fromDate="07/08/2020"
+        toDate="10/08/2020"
+      />
     </div>
   );
 };
