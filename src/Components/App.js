@@ -13,6 +13,14 @@ const App = props => {
   const [currentCityName, setCurrentCityName] = useState("");
   const [flightDate, setFlightDate] = useState(new Date());
 
+  const translateDateToString = dateObj => {
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <div
       style={{
@@ -44,9 +52,18 @@ const App = props => {
       >
         Let's start!
       </Button>
-      <ResultContainer currentCity={currentCityName} flightDate={flightDate} />
-      <ResultContainer currentCity={currentCityName} flightDate={flightDate} />
-      <ResultContainer currentCity={currentCityName} flightDate={flightDate} />
+      <ResultContainer
+        currentCity={currentCityName}
+        flightDate={translateDateToString(flightDate)}
+      />
+      <ResultContainer
+        currentCity={currentCityName}
+        flightDate={translateDateToString(flightDate)}
+      />
+      <ResultContainer
+        currentCity={currentCityName}
+        flightDate={translateDateToString(flightDate)}
+      />
     </div>
   );
 };
