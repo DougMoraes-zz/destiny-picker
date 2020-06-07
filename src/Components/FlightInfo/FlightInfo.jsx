@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@material-ui/core";
 import FlightsApi from "../../APIs/FlightsApi";
+import aiprlaneIcon from "./travel.png";
+import "./FlightInfo.scss";
 
 const FlightInfo = props => {
   const [idToCity, setIdToCity] = useState("");
   const [idFromCity, setIdFromCity] = useState("");
-  const [flights, setFlights] = useState([]);
-  const [avgPrice, setAvgPrice] = useState(0);
+  const [cheapestFlight, setCheapestFlight] = useState({});
+  const [mostExpensivestFlight, setMostExpensivestFlight] = useState({});
 
   useEffect(() => {
     const getCityId = (cityName, updateState) => {
@@ -21,22 +23,22 @@ const FlightInfo = props => {
         `flights?partner=picky&max_stopovers=0&fly_from=${fromCity}&fly_to=${toCity}&date_from=${fromDate}&date_to=${toDate}`
       )
         .then(resp => {
-          setFlights(resp.data.data);
-          CalculateAveragePrice(resp.data.data);
+          getCheapestAndExpensivestFlights(resp.data.data);
         })
         .catch(err => console.log(err));
     };
 
-    const CalculateAveragePrice = list => {
-      const sumPrices = list.reduce((result, item) => {
-        return (result += parseFloat(item.price));
-      }, 0);
+    const getCheapestAndExpensivestFlights = list => {
+      const cheapest = list.reduce((result, item) => {
+        return result.price < parseFloat(item.price) ? result : item;
+      }, {});
 
-      const averagePrice = sumPrices / list.length;
+      const mostExpensive = list.reduce((result, item) => {
+        return result.price > parseFloat(item.price) ? result : item;
+      }, {});
 
-      setAvgPrice(averagePrice);
-
-      return averagePrice;
+      setCheapestFlight(cheapest);
+      setMostExpensivestFlight(mostExpensive);
     };
 
     if (props.toCity !== "" && props.fromCity !== "") {
@@ -48,8 +50,14 @@ const FlightInfo = props => {
   }, [props.toCity, props.fromCity]);
 
   return (
-    <div className={props.className}>
-      <Typography>{`Average Price: ${avgPrice} `}</Typography>
+    <div className={`${props.className} flightinfo-container`}>
+      {cheapestFlight.price && mostExpensivestFlight.price && (
+        <Typography>
+          <img className="airplane-icon" src={aiprlaneIcon} />
+          <p>{`Cheapest Flight: ${cheapestFlight.price}`}</p>
+          <p>{`Most Expensive Flight: ${mostExpensivestFlight.price}`}</p>
+        </Typography>
+      )}
     </div>
   );
 };
