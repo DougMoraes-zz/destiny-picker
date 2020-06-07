@@ -36,12 +36,8 @@ const ResultContainer = props => {
       </div>
       <WeatherInfo cityName={futureCityName} />
       <FlightInfo
-        toCity={
-          props.fromCity !== "" && futureCityName === "" && futureCityName
-        }
-        fromCity={
-          props.fromCity !== "" && futureCityName === "" && props.fromCity
-        }
+        toCity={futureCityName}
+        fromCity={futureCityName !== "" && props.currentCity}
         fromDate="07/08/2020"
         toDate="10/08/2020"
       />
