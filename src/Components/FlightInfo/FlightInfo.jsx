@@ -38,10 +38,12 @@ const FlightInfo = props => {
       return averagePrice;
     };
 
-    getCityId(props.toCity, setIdToCity);
-    getCityId(props.fromCity, setIdFromCity);
+    if (props.toCity !== "" && props.fromCity !== "") {
+      getCityId(props.toCity, setIdToCity);
+      getCityId(props.fromCity, setIdFromCity);
 
-    getFlights(idFromCity, idToCity, props.fromDate, props.toDate);
+      getFlights(idFromCity, idToCity, props.fromDate, props.toDate);
+    }
   }, [props.toCity, props.fromCity]);
 
   return (
