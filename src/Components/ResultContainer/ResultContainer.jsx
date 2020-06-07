@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { TextField, Button } from "@material-ui/core";
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
 import FlightInfo from "../FlightInfo/FlightInfo";
@@ -46,3 +47,7 @@ const ResultContainer = props => {
 };
 
 export default ResultContainer;
+
+ResultContainer.propTypes = {
+  currentCity: PropTypes.string.isRequired
+};

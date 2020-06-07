@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { Typography } from "@material-ui/core";
 import FlightsApi from "../../APIs/FlightsApi";
 
@@ -54,3 +55,10 @@ const FlightInfo = props => {
 };
 
 export default FlightInfo;
+
+FlightInfo.propTypes = {
+  toCity: PropTypes.string.isRequired,
+  fromCity: PropTypes.string.isRequired,
+  fromDate: PropTypes.string.isRequired,
+  toDate: PropTypes.string.isRequired
+};
