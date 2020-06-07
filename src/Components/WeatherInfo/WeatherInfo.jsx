@@ -55,7 +55,7 @@ const WeatherInfo = props => {
     <div className={`weather-info-container ${props.className}`}>
       <img src="https://developer.accuweather.com/sites/default/files/01-s.png"></img>
       <Typography variant="subtitle2">
-        <p>
+        <p className={`temperature-description`}>
           {`Maximum Average Temperature: ${avgTemperatures.maximumAvg} Minimum Average Temperature: ${avgTemperatures.minimumAvg}`}
         </p>
       </Typography>
