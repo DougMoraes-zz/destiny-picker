@@ -24,8 +24,8 @@ const ResultContainer = props => {
       <div>
         <TextField
           label="Type your future city name..."
-          size={"small"}
           onChange={e => setTempCityName(e.currentTarget.value)}
+          disabled={props.currentCity === ""}
         />
         <Button
           variant="outlined"
