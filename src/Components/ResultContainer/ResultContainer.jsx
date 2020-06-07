@@ -39,8 +39,8 @@ const ResultContainer = props => {
       <FlightInfo
         toCity={futureCityName}
         fromCity={futureCityName !== "" && props.currentCity}
-        fromDate="07/08/2020"
-        toDate="10/08/2020"
+        fromDate={props.flightDate}
+        toDate={props.flightDate}
       />
     </div>
   );
