@@ -44,9 +44,9 @@ const App = props => {
       >
         Let's start!
       </Button>
-      <ResultContainer currentCity={currentCityName} />
-      <ResultContainer currentCity={currentCityName} />
-      <ResultContainer currentCity={currentCityName} />
+      <ResultContainer currentCity={currentCityName} flightDate={flightDate} />
+      <ResultContainer currentCity={currentCityName} flightDate={flightDate} />
+      <ResultContainer currentCity={currentCityName} flightDate={flightDate} />
     </div>
   );
 };
