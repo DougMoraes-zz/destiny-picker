@@ -48,7 +48,7 @@ const FlightInfo = props => {
   }, [props.toCity, props.fromCity]);
 
   return (
-    <div>
+    <div className={props.className}>
       <Typography>{`Average Price: ${avgPrice} `}</Typography>
     </div>
   );
