@@ -5,7 +5,7 @@ import FlightInfo from "../FlightInfo/FlightInfo";
 
 const ResultContainer = props => {
   const [tempCityName, setTempCityName] = useState("");
-  const [futureCityName, furuteCityName] = useState("");
+  const [futureCityName, setFutureCityName] = useState("");
 
   return (
     <div
@@ -29,7 +29,7 @@ const ResultContainer = props => {
         <Button
           variant="outlined"
           color="primary"
-          onClick={() => furuteCityName(tempCityName)}
+          onClick={() => setFutureCityName(tempCityName)}
         >
           Get Info!
         </Button>
