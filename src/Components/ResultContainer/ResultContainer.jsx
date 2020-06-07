@@ -3,34 +3,27 @@ import PropTypes from "prop-types";
 import { TextField, Button } from "@material-ui/core";
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
 import FlightInfo from "../FlightInfo/FlightInfo";
+import "./ResultContainer.scss";
 
 const ResultContainer = props => {
   const [tempCityName, setTempCityName] = useState("");
   const [futureCityName, setFutureCityName] = useState("");
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        border: "1px solid lightgray",
-        borderRadius: "1%",
-        minHeight: "10em",
-        minWidth: "80%",
-        margin: "5px",
-        padding: "15px"
-      }}
-    >
-      <div>
+    <div className="result-container">
+      <div className="future-city-form">
         <TextField
-          label="Type your future city name..."
+          label="Future city name..."
           onChange={e => setTempCityName(e.currentTarget.value)}
+          margin="normal"
+          variant="outlined"
           disabled={props.currentCity === ""}
         />
         <Button
           variant="outlined"
           color="primary"
           onClick={() => setFutureCityName(tempCityName)}
+          disabled={props.currentCity === ""}
         >
           Get Info!
         </Button>
