@@ -49,17 +49,20 @@ const FlightInfo = props => {
     }
   }, [props.toCity, props.fromCity]);
 
-  return (
-    <div className={`${props.className} flightinfo-container`}>
-      {cheapestFlight.price && mostExpensivestFlight.price && (
-        <Typography>
-          <img className="airplane-icon" src={aiprlaneIcon} />
-          <p>{`Cheapest Flight: ${cheapestFlight.price}`}</p>
-          <p>{`Most Expensive Flight: ${mostExpensivestFlight.price}`}</p>
-        </Typography>
-      )}
+  return cheapestFlight.price && mostExpensivestFlight.price ? (
+    <div className="flightinfo-container">
+      <div className={`${props.className} flightinfo-item`}>
+        <img className="airplane-icon" src={aiprlaneIcon} />
+        <Typography className="cheap-flight-description">{`Cheapest Flight: ${cheapestFlight.price}€`}</Typography>
+        <Typography className="cheap-flight-description">{`Flight Duration: ${mostExpensivestFlight.fly_duration}`}</Typography>
+      </div>
+      <div className={`${props.className} flightinfo-item`}>
+        <img className="airplane-icon" src={aiprlaneIcon} />
+        <Typography className="expensive-flight-description">{`Most Expensive Flight: ${cheapestFlight.price}€`}</Typography>
+        <Typography className="expensive-flight-description">{`Flight Duration: ${mostExpensivestFlight.price}`}</Typography>
+      </div>
     </div>
-  );
+  ) : null;
 };
 
 export default FlightInfo;
