@@ -1,6 +1,23 @@
-.flightinfo-container {
+.flightinfo-item {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 0px 10px;
+}
+
+.flightinfo-container {
+  display: flex;
+  align-items: center;
+}
+
+.cheap-flight-description {
+  font-size: 9px;
+  color: red;
+}
+
+.expensive-flight-description {
+  font-size: 9px;
+  color: green;
 }
 
 .airplane-icon {
