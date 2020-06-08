@@ -43,8 +43,8 @@ const FlightInfo = props => {
         .all([getCityId(props.toCity), getCityId(props.fromCity)])
         .then(
           axios.spread((...responses) => {
-            const idToCity = responses[0].data.locations[0];
-            const idFromCity = responses[1].data.locations[0];
+            const idToCity = responses[0].data.locations[0].id;
+            const idFromCity = responses[1].data.locations[0].id;
 
             getFlights(idFromCity, idToCity, props.fromDate, props.toDate);
           })
@@ -65,7 +65,7 @@ const FlightInfo = props => {
       <div className={`${props.className} flightinfo-item`}>
         <img className="airplane-icon" src={aiprlaneIcon} />
         <Typography className="expensive-flight-description">{`Most Expensive Flight: ${cheapestFlight.price}€`}</Typography>
-        <Typography className="expensive-flight-description">{`Flight Duration: ${mostExpensiveFlight.price}`}</Typography>
+        <Typography className="expensive-flight-description">{`Flight Duration: ${mostExpensiveFlight.fly_duration}`}</Typography>
       </div>
     </div>
   ) : null;
