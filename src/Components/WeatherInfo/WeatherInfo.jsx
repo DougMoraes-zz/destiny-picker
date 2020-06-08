@@ -30,10 +30,20 @@ const WeatherInfo = props => {
     props.cityName !== "" && getCityId(props.cityName);
   }, [props.cityName]);
 
+  const mountDate = dateStr => {
+    const dateObj = new Date(dateStr);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <div className={`weather-info-container ${props.className}`}>
       {forecasts.length > 0 && (
         <Typography variant="subtitle2">
+          <p>{mountDate(forecasts[0].Date)}</p>
           <img
             src={`https://developer.accuweather.com/sites/default/files/${
               forecasts[0].Day.Icon < 10
@@ -45,7 +55,7 @@ const WeatherInfo = props => {
             {`${forecasts[0].Day.IconPhrase}`}
           </p>
           <p className={`temperature-description`}>
-            {`${forecasts[0].Temperature.Maximum.Value} C / ${forecasts[0].Temperature.Minimum.Value} C`}
+            {`${forecasts[0].Temperature.Maximum.Value}°C / ${forecasts[0].Temperature.Minimum.Value}°C`}
           </p>
         </Typography>
       )}
