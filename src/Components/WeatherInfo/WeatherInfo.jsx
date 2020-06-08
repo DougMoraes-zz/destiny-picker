@@ -13,7 +13,6 @@ const WeatherInfo = props => {
         .get(`${cityKey}?apikey=G5jhNzZpn0iWknOJM3pZzf4mrGFdzDzI&metric=true`)
         .then(resp => resp.data.DailyForecasts)
         .then(forecasts => {
-          console.log(forecasts);
           setForecasts(forecasts);
         })
         .catch(err => console.log(err));
@@ -41,24 +40,23 @@ const WeatherInfo = props => {
 
   return (
     <div className={`weather-info-container ${props.className}`}>
-      {forecasts.length > 0 && (
-        <Typography variant="subtitle2">
-          <p>{mountDate(forecasts[0].Date)}</p>
-          <img
-            src={`https://developer.accuweather.com/sites/default/files/${
-              forecasts[0].Day.Icon < 10
-                ? "0" + forecasts[0].Day.Icon
-                : forecasts[0].Day.Icon
-            }-s.png`}
-          />
-          <p className={`temperature-description`}>
-            {`${forecasts[0].Day.IconPhrase}`}
-          </p>
-          <p className={`temperature-description`}>
-            {`${forecasts[0].Temperature.Maximum.Value}°C / ${forecasts[0].Temperature.Minimum.Value}°C`}
-          </p>
-        </Typography>
-      )}
+      {forecasts.length > 0 &&
+        forecasts.map(item => (
+          <div className="weather-info-item">
+            <Typography>{mountDate(item.Date)}</Typography>
+            <img
+              src={`https://developer.accuweather.com/sites/default/files/${
+                item.Day.Icon < 10 ? "0" + item.Day.Icon : item.Day.Icon
+              }-s.png`}
+            />
+            <Typography className={`temperature-description`}>
+              {`${item.Day.IconPhrase}`}
+            </Typography>
+            <Typography className={`temperature-description`}>
+              {`${item.Temperature.Maximum.Value}°C / ${item.Temperature.Minimum.Value}°C`}
+            </Typography>
+          </div>
+        ))}
     </div>
   );
 };
