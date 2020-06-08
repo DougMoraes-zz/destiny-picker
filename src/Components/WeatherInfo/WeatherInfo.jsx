@@ -2,39 +2,19 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@material-ui/core";
 import WeatherApi from "../../APIs/WeatherApi";
+import "./WeatherInfo.scss";
 
 const WeatherInfo = props => {
   const [forecasts, setForecasts] = useState([]);
-  const [avgTemperatures, setAvgTemperatures] = useState({
-    minimumAvg: 0,
-    maximumAvg: 0
-  });
 
   useEffect(() => {
-    const CalculateAverageTemperature = list => {
-      const temperatures = list.reduce(
-        (result, item) => {
-          result.minimumAvg += item.Temperature.Minimum.Value;
-          result.maximumAvg += item.Temperature.Maximum.Value;
-
-          return result;
-        },
-        { minimumAvg: 0, maximumAvg: 0 }
-      );
-
-      temperatures.minimumAvg = temperatures.minimumAvg / list.length;
-      temperatures.maximumAvg = temperatures.maximumAvg / list.length;
-
-      return temperatures;
-    };
-
     const getForecasts = cityKey => {
       WeatherApi.forecasts
         .get(`${cityKey}?apikey=G5jhNzZpn0iWknOJM3pZzf4mrGFdzDzI&metric=true`)
         .then(resp => resp.data.DailyForecasts)
         .then(forecasts => {
+          console.log(forecasts);
           setForecasts(forecasts);
-          setAvgTemperatures(CalculateAverageTemperature(forecasts));
         })
         .catch(err => console.log(err));
     };
@@ -50,9 +30,35 @@ const WeatherInfo = props => {
     props.cityName !== "" && getCityId(props.cityName);
   }, [props.cityName]);
 
+  const mountDate = dateStr => {
+    const dateObj = new Date(dateStr);
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const year = dateObj.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  };
+
   return (
-    <div className={props.className}>
-      <Typography>{` Maximum Average Temperature: ${avgTemperatures.maximumAvg} Minimum Average Temperature: ${avgTemperatures.minimumAvg}`}</Typography>
+    <div className={`weather-info-container ${props.className}`}>
+      {forecasts.length > 0 && (
+        <Typography variant="subtitle2">
+          <p>{mountDate(forecasts[0].Date)}</p>
+          <img
+            src={`https://developer.accuweather.com/sites/default/files/${
+              forecasts[0].Day.Icon < 10
+                ? "0" + forecasts[0].Day.Icon
+                : forecasts[0].Day.Icon
+            }-s.png`}
+          />
+          <p className={`temperature-description`}>
+            {`${forecasts[0].Day.IconPhrase}`}
+          </p>
+          <p className={`temperature-description`}>
+            {`${forecasts[0].Temperature.Maximum.Value}°C / ${forecasts[0].Temperature.Minimum.Value}°C`}
+          </p>
+        </Typography>
+      )}
     </div>
   );
 };
