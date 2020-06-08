@@ -9,7 +9,7 @@ const FlightInfo = props => {
   const [idToCity, setIdToCity] = useState("");
   const [idFromCity, setIdFromCity] = useState("");
   const [cheapestFlight, setCheapestFlight] = useState({});
-  const [mostExpensivestFlight, setMostExpensivestFlight] = useState({});
+  const [mostExpensiveFlight, setMostExpensiveFlight] = useState({});
 
   useEffect(() => {
     const getCityId = (cityName, updateState) => {
@@ -38,7 +38,7 @@ const FlightInfo = props => {
       }, {});
 
       setCheapestFlight(cheapest);
-      setMostExpensivestFlight(mostExpensive);
+      setMostExpensiveFlight(mostExpensive);
     };
 
     if (props.toCity !== "" && props.fromCity !== "") {
@@ -49,17 +49,17 @@ const FlightInfo = props => {
     }
   }, [props.toCity, props.fromCity]);
 
-  return cheapestFlight.price && mostExpensivestFlight.price ? (
+  return cheapestFlight.price && mostExpensiveFlight.price ? (
     <div className="flightinfo-container">
       <div className={`${props.className} flightinfo-item`}>
         <img className="airplane-icon" src={aiprlaneIcon} />
         <Typography className="cheap-flight-description">{`Cheapest Flight: ${cheapestFlight.price}€`}</Typography>
-        <Typography className="cheap-flight-description">{`Flight Duration: ${mostExpensivestFlight.fly_duration}`}</Typography>
+        <Typography className="cheap-flight-description">{`Flight Duration: ${mostExpensiveFlight.fly_duration}`}</Typography>
       </div>
       <div className={`${props.className} flightinfo-item`}>
         <img className="airplane-icon" src={aiprlaneIcon} />
         <Typography className="expensive-flight-description">{`Most Expensive Flight: ${cheapestFlight.price}€`}</Typography>
-        <Typography className="expensive-flight-description">{`Flight Duration: ${mostExpensivestFlight.price}`}</Typography>
+        <Typography className="expensive-flight-description">{`Flight Duration: ${mostExpensiveFlight.price}`}</Typography>
       </div>
     </div>
   ) : null;
