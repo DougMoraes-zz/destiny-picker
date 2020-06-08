@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { Typography } from "@material-ui/core";
 import FlightsApi from "../../APIs/FlightsApi";
 import aiprlaneIcon from "./travel.png";
 import "./FlightInfo.scss";
 
 const FlightInfo = props => {
-  const [idToCity, setIdToCity] = useState("");
-  const [idFromCity, setIdFromCity] = useState("");
   const [cheapestFlight, setCheapestFlight] = useState({});
   const [mostExpensiveFlight, setMostExpensiveFlight] = useState({});
 
   useEffect(() => {
-    const getCityId = (cityName, updateState) => {
-      FlightsApi.get(`locations?term=${cityName}`)
-        .then(resp => updateState(resp.data.locations[0].id))
-        .catch(err => console.log(err));
+    const getCityId = cityName => {
+      return FlightsApi.get(`locations?term=${cityName}`);
     };
 
     const getFlights = (fromCity, toCity, fromDate, toDate) => {
@@ -42,10 +39,19 @@ const FlightInfo = props => {
     };
 
     if (props.toCity !== "" && props.fromCity !== "") {
-      getCityId(props.toCity, setIdToCity);
-      getCityId(props.fromCity, setIdFromCity);
+      axios
+        .all([getCityId(props.toCity), getCityId(props.fromCity)])
+        .then(
+          axios.spread((...responses) => {
+            const idToCity = responses[0].data.locations[0];
+            const idFromCity = responses[1].data.locations[0];
 
-      getFlights(idFromCity, idToCity, props.fromDate, props.toDate);
+            getFlights(idFromCity, idToCity, props.fromDate, props.toDate);
+          })
+        )
+        .catch(errors => {
+          console.log(errors);
+        });
     }
   }, [props.toCity, props.fromCity]);
 
