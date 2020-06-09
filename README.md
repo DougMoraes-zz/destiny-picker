@@ -1,68 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Stream Trailers
 
-## Available Scripts
+#### Summary:
 
-In the project directory, you can run:
+An application help you compare cities information, it can help you decide where to move or visit next.
+I am using the [Kiwi API](https://docs.kiwi.com) to get flights data and [AccuWeather API](https://developer.accuweather.com)
 
-### `yarn start`
+## Project Status
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+That is a study project. A few improvements yet to be donne:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- [ ] Cover 40% of the project with tests
+- [ ] Use historical weather data to give a better overview of city weather
+- [ ] Add information about living costs
+- [ ] Add information about price of hotels
+- [ ] Add possibility to save searches
+- [ ] Add error handling
+- [ ] Add design for no found cities.
 
-### `yarn test`
+## Installation and Setup Instructions
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone down this repository. You will need `node` and `npm or yarn` installed globally on your machine.
 
-### `yarn build`
+Installation:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`npm install` or `yarn install`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+To Run Test Suite:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`npm test` or `yarn install`
 
-### `yarn eject`
+To Start Server:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`npm start` or `yarn install`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To Visit App:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`localhost:3000`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Reflection
 
-## Learn More
+A nice project to apply basic concepts of front end development.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The idea here is to solve the problem of someone that it's looking for the next city to visit. So basically It's a city comparator.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+For now it's takes in consideration price of flights (most expensive and cheapest) gathering data from [Kiwi API](https://docs.kiwi.com).
+Here we face a no-ideal scenario when one api call needs to wait for the result of two others api calls (get id from current city and destiny city),
+I used axis.all (a implementation of Promise.All) to wait for the api calls before calling the flights api.
 
-### Code Splitting
+It also provide weather forecasts for the next five days, I use the [AccuWeather API](https://developer.accuweather.com) for that. I would like to use
+historical data to provide a general maximum average and minimal average temperature, and the most common weather state (sunny, cloudy, etc), that was
+not possible because I'm using the free version of the api so no access to historical data, other similar API also doesn't provide historical data, so
+I had a plan B to show the maximal of forecasts possible, 5 days in AccuWeather.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+I will implement an optional login functionality to let the user save searches.
